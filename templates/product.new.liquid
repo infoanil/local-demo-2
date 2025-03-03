@@ -1,0 +1,20 @@
+<div class="product">
+  <h1>
+    {{ product.title }}
+  </h1>
+  {% section 'my-page-section' %}
+  <p class="images">
+    {% for image in product.images %}
+      <img src="{{ image | img_url: 'large'  }}" /> <br>
+
+      <div> {{ product.price | money_without_currency }}</div>
+      <div> {{ product.price | money }}</div>
+      {{ product.handle }} <br>
+      {{ product.url }} <br>
+
+      {% for variant in product.variants %}
+        {{ variant.price | money }}
+        {% endfor %}
+    {% endfor %}
+  </p>
+</div>

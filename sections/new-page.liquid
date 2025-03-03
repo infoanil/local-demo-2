@@ -1,0 +1,42 @@
+<div style="max-width: 888px; margin: 0 auto; text-align: {{ section.settings.text_alignment }}; font-family: Arial, sans-serif;">
+  <blockquote style="font-size: 24px; font-weight: 400; line-height: 1.6; margin: 0;">
+    “ {{ section.settings.main_text }} ”
+  </blockquote>
+  <p style="font-size: 16px; color: #666; margin-top: 10px;">{{ section.settings.subtitle }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Quote Section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "main_text",
+      "label": "Main Text",
+      "default": "Woxer has evolved into a brand that’s synonymous with self-empowerment through comfort."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Alex Fuente, Founder & CEO"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "default": "center",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quote Section"
+    }
+  ]
+}
+{% endschema %}

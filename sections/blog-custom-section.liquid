@@ -1,0 +1,36 @@
+{% liquid
+    assign faq_group = shop.metaobjects.pdp_faq_group[product_type]
+    assign faqs = faq_group.select_fa_qs.value
+    assign faqs_array = faq_group.select_fa_qs | split: ','
+    assign total_faq = faqs_array | size
+
+%}
+
+<section class="blog-custom-section">
+    <div class="blog-custom-section-container">
+
+    </div>
+</section>
+{% schema %}
+{
+  "name": "Blog custom section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_line_separator",
+      "default": true,
+      "label": "t:sections.header.settings.show_line_separator.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.announcement-bar.settings.header__1.content",
+      "info": "t:sections.announcement-bar.settings.header__1.info"
+    },
+  ],
+  "presets": [
+    {
+      "name": "Blog custom section"
+    }
+  ]
+}
+{% endschema %}

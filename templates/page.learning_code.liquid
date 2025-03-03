@@ -1,0 +1,39 @@
+<div class="grid">
+  <p class="text-center">learning shopify</p>
+  <br>
+  {% assign color = 'yellow' %}
+
+  {% case color %}
+  {% when 'green' %}
+    color is {{ color }}
+    {% else %}
+    None above 
+  {% endcase %}
+  {% comment %}
+  this is your name
+  {% endcomment %}
+
+  {% assign number1 = 5 %}
+  {% assign number2 = 3 %}
+  {% assign number3 = 7 %}
+
+  <br>
+  {% if number1 > number2 and number3 > number1  %}
+  this is right number
+    {% else %}
+    not awolled number
+  {% endif %}
+</div>
+
+<style>
+  .grid{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .text-center{
+    text-align: center;
+    width:100%;
+    font-weight: bold;
+  }
+</style>
