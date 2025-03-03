@@ -35,7 +35,15 @@
   --image-padding: var(--collection-card-image-padding);
   --text-alignment: var(--collection-card-text-alignment);
 }
-
+.text-center {
+    text-align: center !important;
+}
+.text-end {
+    text-align: right !important;
+}
+.text-start {
+    text-align: left !important;
+}
 .article-card-wrapper .card,
 .contains-card--article {
   --border-radius: var(--blog-card-corner-radius);

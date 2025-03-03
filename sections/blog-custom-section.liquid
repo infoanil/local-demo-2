@@ -1,14 +1,42 @@
 {% liquid
-    assign faq_group = shop.metaobjects.pdp_faq_group[product_type]
-    assign faqs = faq_group.select_fa_qs.value
-    assign faqs_array = faq_group.select_fa_qs | split: ','
-    assign total_faq = faqs_array | size
-
+    assign section_group = article.metafields.custom.blog_sections_metaobject.value
+    assign blog_sections = section_group.select_sections.value
 %}
 
-<section class="blog-custom-section">
+<section class="blog-custom-section page-width page-width--narrow">
     <div class="blog-custom-section-container">
+        {% for blog_section in blog_sections %}
+            {% if blog_section.image_text_seciton_ %}
+                <div class="image_text_section {% unless blog_section.image_first_ %} flex-reverse{% endunless %}" style="gap: 24px; align-items: center;justify-content: center">
+                    <div class="image-container">
+                        <img src="{{ blog_section.image | img_url: 'master' }}" alt="{{ blog_section.identifier }}" style="width: 340px">
+                    </div>
+                    <div class="text-container" style="display: flex; flex-direction: column; gap: 10px">
+                        <h2 class="title" >{{ blog_section.title }}</h2>
+                        <div class="description">{{ blog_section.description | metafield_tag }}</div>
+                        <a href="{{ blog_section.button_url }}" class="button_text">{{ blog_section.button_text }}</a>
+                    </div>
+                </div>
+            {% endif %}
+            {% if blog_section.is_reccomendation_ %}
+                <div class="recommendation-section" style="margin: 20px auto">
+                    <div class="carousel-container">
+                        <div class="carousel">
+                            {% for product in blog_section.recommendation_collection.value.products %}
+                                <div class="carousel-item">
+                                    <a href="{{ product.url }}">
+                                        <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+                                        <h3>{{ product.title }}</h3>
+                                        <p>{{ product.price | money }}</p>
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
 
+                </div>
+            {% endif %}
+        {% endfor %}
     </div>
 </section>
 {% schema %}
@@ -34,3 +62,47 @@
   ]
 }
 {% endschema %}
+
+<style>
+    .image_text_section {
+        display: flex;
+    }
+    .image_text_section.flex-reverse {
+        flex-direction: row-reverse;
+    }
+    .carousel-container {
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .carousel {
+        display: flex;
+        gap: 1rem;
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .carousel-item {
+        min-width: 200px;
+        flex-shrink: 0;
+        text-align: center;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .carousel-item h3 {
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .carousel-item p {
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+</style>
